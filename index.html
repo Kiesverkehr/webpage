@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>KIESVERKEHR</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    /* =========================================================
+       RESET
+       ========================================================= */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #111;
+    }
+
+    body {
+      font-family:
+        "IBM Plex Mono",
+        "Courier New",
+        monospace;
+
+      color: #111;
+    }
+
+
+    /* =========================================================
+       FIXED SCENE
+       ========================================================= */
+
+    .scene {
+      position: absolute;
+
+      left: 50%;
+      top: 50%;
+
+      width: min(100vw, 160vh);
+
+      aspect-ratio: 16 / 10;
+
+      transform:
+        translate(-50%, -50%);
+
+      overflow: hidden;
+
+      background-image:
+        url("background.png");
+
+      background-size:
+        100% 100%;
+
+      background-position:
+        center;
+
+      background-repeat:
+        no-repeat;
+    }
+
+
+    /* =========================================================
+       SCREEN / PRINT TEXTURE
+       ========================================================= */
+
+    .scene::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      z-index: 1000;
+
+      pointer-events: none;
+
+      background:
+        repeating-linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.018) 0,
+          rgba(0, 0, 0, 0.018) 1px,
+          transparent 1px,
+          transparent 4px
+        );
+    }
+
+
+    /* =========================================================
+       LOGO
+       ========================================================= */
+
+    .top-image {
+      position: absolute;
+
+      left: 50%;
+      top: 1.5%;
+
+      width: 84%;
+      height: auto;
+
+      transform:
+        translateX(-50%);
+
+      z-index: 20;
+
+      pointer-events: none;
+
+      mix-blend-mode: multiply;
+    }
+
+
+    /* =========================================================
+       MAIN BIKE IMAGE
+       ========================================================= */
+
+    .center-image {
+      --image-y: 35%;
+
+      position: absolute;
+
+      left: 50%;
+      top: var(--image-y);
+
+      width: 58%;
+      height: auto;
+
+      transform:
+        translateX(-50%);
+
+      z-index: 10;
+
+      will-change:
+        transform,
+        opacity,
+        filter,
+        clip-path;
+
+      transition:
+        filter 180ms ease;
+    }
+
+
+    /* =========================================================
+       BIKE
+       ========================================================= */
+
+    .center-image.bike-clickable {
+      cursor: pointer;
+
+      filter:
+        contrast(1.04)
+        saturate(.92);
+    }
+
+    .center-image.bike-clickable:hover {
+      filter:
+        contrast(1.10)
+        brightness(1.035)
+        saturate(.98);
+
+      transform:
+        translateX(-50%)
+        scale(1.018);
+    }
+
+
+    /* =========================================================
+       BROKEN WEB NAVIGATION
+       ========================================================= */
+
+    .broken-nav {
+      position: absolute;
+
+      left: 3.8%;
+      bottom: 2.2%;
+
+      z-index: 100;
+
+      display: flex;
+      align-items: baseline;
+
+      gap: 1.5vw;
+
+      white-space: nowrap;
+
+      font-family:
+        "IBM Plex Mono",
+        monospace;
+
+      font-size:
+        clamp(8px, 1.25vw, 20px);
+
+      font-weight: 500;
+
+      letter-spacing: -0.05em;
+    }
+
+    .broken-nav a {
+      position: relative;
+
+      color: #F5A39A;
+
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+
+      cursor: pointer;
+
+      padding: 0;
+
+      opacity: 0.9;
+
+      transition:
+        transform 70ms steps(2),
+        opacity 70ms steps(2);
+    }
+
+    .broken-nav a:visited {
+      color: #F5A39A;
+    }
+
+    .broken-nav a:hover {
+      color: #F5A39A;
+
+      opacity: 1;
+
+      transform:
+        translate(-2px, -2px);
+    }
+
+
+    /* =========================================================
+       ACTIVE PAGE
+       ========================================================= */
+
+    .broken-nav a.active {
+      color: #F5A39A;
+
+      opacity: 1;
+
+      text-decoration-style: wavy;
+
+      font-style: italic;
+    }
+
+    .broken-nav a.active::before {
+      content: ">>";
+
+      position: absolute;
+
+      left: -1.5em;
+
+      color: #F5A39A;
+
+      text-decoration: none;
+
+      font-style: normal;
+
+      font-size: 0.7em;
+    }
+
+
+    /* =========================================================
+       CORRUPTION CHARACTERS
+       ========================================================= */
+
+    .corrupt {
+      display: inline-block;
+
+      color: #111;
+
+      text-decoration: none;
+
+      font-weight: 400;
+
+      letter-spacing: 0.1em;
+
+      opacity: 0.9;
+
+      pointer-events: none;
+    }
+
+    .corrupt.small {
+      font-size: 0.65em;
+
+      opacity: 0.65;
+    }
+
+
+    /* =========================================================
+       ABOUT
+       ========================================================= */
+
+    .about-content {
+      position: absolute;
+
+      left: 31%;
+      top: 62%;
+
+      transform:
+        translateY(-50%);
+
+      z-index: 20;
+
+      display: none;
+
+      width: 45%;
+
+      font-family:
+        "IBM Plex Mono",
+        monospace;
+
+      color: #111;
+
+      will-change:
+        transform,
+        opacity,
+        filter,
+        clip-path;
+    }
+
+
+    /* =========================================================
+       ABOUT MAIN TEXT
+       ========================================================= */
+
+    .about-main {
+      font-size:
+        clamp(9px, 1.5vw, 24px);
+
+      font-weight: 500;
+
+      line-height: 1.25;
+
+      letter-spacing: -0.04em;
+
+      margin-bottom: 4%;
+    }
+
+
+    /* =========================================================
+       ABOUT META
+       ========================================================= */
+
+    .about-meta {
+      font-size:
+        clamp(7px, 0.95vw, 15px);
+
+      line-height: 1.5;
+
+      margin-bottom: 4%;
+    }
+
+
+    /* =========================================================
+       ABOUT LINKS
+       ========================================================= */
+
+    .about-links {
+      display: flex;
+
+      align-items: baseline;
+
+      flex-wrap: wrap;
+
+      gap: 0.4em 1.3em;
+
+      font-size:
+        clamp(8px, 1.2vw, 19px);
+    }
+
+    .about-links a {
+      color: #F5A39A;
+
+      opacity: 0.9;
+
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+
+      transition:
+        opacity 70ms steps(2),
+        transform 70ms steps(2);
+    }
+
+    .about-links a:visited {
+      color: #F5A39A;
+    }
+
+    .about-links a:hover {
+      color: #F5A39A;
+
+      opacity: 1;
+
+      transform:
+        translate(-2px, -2px);
+    }
+
+
+    /* =========================================================
+       RANDOM SYSTEM TEXT
+       ========================================================= */
+
+    .system-text {
+      position: absolute;
+
+      right: 1.6%;
+      bottom: 2.4%;
+
+      z-index: 30;
+
+      font-size:
+        clamp(4px, 0.56vw, 9px);
+
+      line-height: 1.5;
+
+      letter-spacing: 0.1em;
+
+      text-align: right;
+
+      color: #111;
+
+      opacity: 0.55;
+
+      pointer-events: none;
+    }
+
+
+    /* =========================================================
+       TOP LEFT MICRO TEXT
+       ========================================================= */
+
+    .micro-text {
+      position: absolute;
+
+      left: 1.1%;
+      top: 1.7%;
+
+      z-index: 30;
+
+      font-size:
+        clamp(4px, 0.56vw, 9px);
+
+      line-height: 1.4;
+
+      letter-spacing: 0.1em;
+
+      opacity: 0.45;
+
+      pointer-events: none;
+    }
+
+
+    /* =========================================================
+       GLITCH OUT
+       ========================================================= */
+
+    .glitch-out {
+      animation:
+        glitchOut
+        0.22s
+        steps(4)
+        forwards;
+    }
+
+    @keyframes glitchOut {
+
+      0% {
+        opacity: 1;
+
+        filter: none;
+
+        clip-path:
+          inset(0);
+
+        transform:
+          translateX(-50%);
+      }
+
+      20% {
+        transform:
+          translateX(calc(-50% + 10px))
+          scaleX(1.03);
+
+        filter:
+          contrast(1.5)
+          brightness(1.3);
+      }
+
+      40% {
+        transform:
+          translateX(calc(-50% - 14px))
+          scaleX(0.95);
+
+        filter:
+          contrast(2)
+          brightness(1.7);
+
+        clip-path:
+          inset(15% 0 40% 0);
+      }
+
+      60% {
+        transform:
+          translateX(calc(-50% + 18px))
+          scaleX(1.08);
+
+        clip-path:
+          inset(55% 0 10% 0);
+
+        opacity: 0.8;
+      }
+
+      80% {
+        transform:
+          translateX(calc(-50% - 10px))
+          scaleX(0.9);
+
+        clip-path:
+          inset(30% 0 45% 0);
+
+        opacity: 0.4;
+      }
+
+      100% {
+        transform:
+          translateX(calc(-50% - 20px))
+          scaleX(0.7);
+
+        clip-path:
+          inset(49% 0 49% 0);
+
+        opacity: 0;
+      }
+
+    }
+
+
+    /* =========================================================
+       GLITCH IN
+       ========================================================= */
+
+    .glitch-in {
+      animation:
+        glitchIn
+        0.28s
+        steps(5)
+        forwards;
+    }
+
+    @keyframes glitchIn {
+
+      0% {
+        opacity: 0;
+
+        transform:
+          translateX(calc(-50% + 20px))
+          scaleX(0.7);
+
+        filter:
+          contrast(2)
+          brightness(1.8);
+
+        clip-path:
+          inset(49% 0 49% 0);
+      }
+
+      20% {
+        opacity: 0.3;
+
+        transform:
+          translateX(calc(-50% - 15px))
+          scaleX(1.1);
+
+        clip-path:
+          inset(60% 0 5% 0);
+      }
+
+      40% {
+        opacity: 0.6;
+
+        transform:
+          translateX(calc(-50% + 12px))
+          scaleX(0.94);
+
+        clip-path:
+          inset(10% 0 45% 0);
+      }
+
+      60% {
+        opacity: 0.8;
+
+        transform:
+          translateX(calc(-50% - 7px))
+          scaleX(1.04);
+
+        clip-path:
+          inset(35% 0 15% 0);
+      }
+
+      80% {
+        opacity: 1;
+
+        transform:
+          translateX(calc(-50% + 4px));
+
+        clip-path:
+          inset(0);
+      }
+
+      100% {
+        opacity: 1;
+
+        transform:
+          translateX(-50%);
+
+        filter: none;
+
+        clip-path:
+          inset(0);
+      }
+
+    }
+
+
+    /* =========================================================
+       ABOUT GLITCH IN
+       ========================================================= */
+
+    .about-content.glitch-in {
+      animation:
+        aboutGlitchIn
+        0.28s
+        steps(5)
+        forwards;
+    }
+
+    @keyframes aboutGlitchIn {
+
+      0% {
+        opacity: 0;
+
+        transform:
+          translate(
+            25px,
+            -50%
+          )
+          scaleX(0.8);
+
+        filter:
+          contrast(2)
+          brightness(1.8);
+
+        clip-path:
+          inset(48% 0 48% 0);
+      }
+
+      30% {
+        opacity: 0.5;
+
+        transform:
+          translate(
+            -12px,
+            -50%
+          )
+          scaleX(1.08);
+
+        clip-path:
+          inset(10% 0 50% 0);
+      }
+
+      60% {
+        opacity: 0.8;
+
+        transform:
+          translate(
+            8px,
+            -50%
+          );
+
+        clip-path:
+          inset(55% 0 5% 0);
+      }
+
+      100% {
+        opacity: 1;
+
+        transform:
+          translate(
+            0,
+            -50%
+          );
+
+        filter: none;
+
+        clip-path:
+          inset(0);
+      }
+
+    }
+
+
+    /* =========================================================
+       ABOUT GLITCH OUT
+       ========================================================= */
+
+    .about-content.glitch-out {
+      animation:
+        aboutGlitchOut
+        0.22s
+        steps(4)
+        forwards;
+    }
+
+    @keyframes aboutGlitchOut {
+
+      0% {
+        opacity: 1;
+
+        transform:
+          translate(
+            0,
+            -50%
+          );
+
+        clip-path:
+          inset(0);
+      }
+
+      40% {
+        transform:
+          translate(
+            -15px,
+            -50%
+          )
+          scaleX(1.06);
+
+        clip-path:
+          inset(20% 0 40% 0);
+      }
+
+      70% {
+        opacity: 0.5;
+
+        transform:
+          translate(
+            20px,
+            -50%
+          )
+          scaleX(0.9);
+
+        clip-path:
+          inset(60% 0 10% 0);
+      }
+
+      100% {
+        opacity: 0;
+
+        transform:
+          translate(
+            -20px,
+            -50%
+          )
+          scaleX(0.7);
+
+        clip-path:
+          inset(49% 0 49% 0);
+      }
+
+    }
+
+
+    /* =========================================================
+       RESPONSIVE SCENE
+       ========================================================= */
+
+    @media (max-aspect-ratio: 16/10) {
+
+      .scene {
+        width: 100vw;
+      }
+
+    }
+
+    @media (min-aspect-ratio: 16/10) {
+
+      .scene {
+        width: 160vh;
+      }
+
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <!-- =========================================================
+       FIXED ARTWORK
+       ========================================================= -->
+
+  <main class="scene">
+
+
+    <!-- =======================================================
+         SMALL BROKEN-WEB DETAIL
+         ======================================================= -->
+
+    <div class="micro-text">
+      [KSVR/26]<br>
+      DOCUMENT_001
+    </div>
+
+
+    <!-- =======================================================
+         LOGO
+         ======================================================= -->
+
+    <img
+      src="logo.png"
+      class="top-image"
+      alt="Kiesverkehr"
+    >
+
+
+    <!-- =======================================================
+         BIKE
+         ======================================================= -->
+
+    <img
+      src="bike.png"
+      id="main-image"
+      class="center-image bike-clickable"
+      alt="Kiesverkehr gravel bike"
+    >
+
+
+    <!-- =======================================================
+         ABOUT
+         ======================================================= -->
+
+    <div
+      id="about-content"
+      class="about-content"
+    >
+
+      <div class="about-main">
+
+        <span class="corrupt">
+          Â Â
+        </span>
+
+        BUILT AROUND RIDING,
+
+        <br>
+
+        <span class="corrupt">
+          Â Â Â
+        </span>
+
+        MAKING AND EXPERIMENTING.
+
+        <span class="corrupt small">
+          Â Â
+        </span>
+
+      </div>
+
+
+      <div class="about-meta">
+
+        <span class="corrupt">
+          Â Â
+        </span>
+
+        EST. 2026
+
+        <br>
+
+        <span class="corrupt">
+          Â Â Â
+        </span>
+
+        DARMSTADT / DE
+
+        <span class="corrupt small">
+          Â
+        </span>
+
+      </div>
+
+
+      <div class="about-links">
+
+        <span class="corrupt">
+          Â Â Â
+        </span>
+
+        <a
+          href="https://www.instagram.com/kiesverkehr/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          INSTAGRAM &lt;-
+        </a>
+
+        <span class="corrupt">
+          Â Â Â Â
+        </span>
+
+        <a href="mailto:kiesverkehr@gmail.com">
+          CONTACT &lt;-
+        </a>
+
+        <span class="corrupt">
+          Â Â
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- =======================================================
+         NAVIGATION
+         ======================================================= -->
+
+    <nav class="broken-nav">
+
+      <span class="corrupt">
+        Â Â Â
+      </span>
+
+      <a
+        href="#bike"
+        id="nav-bike"
+        class="active"
+        onclick="showBike(event)"
+      >
+        [01] BIKE
+      </a>
+
+      <span class="corrupt">
+        Â Â
+      </span>
+
+      <a
+        href="#about"
+        id="nav-about"
+        onclick="showAbout(event)"
+      >
+        [02] ABOUT
+      </a>
+
+      <span class="corrupt">
+        Â Â
+      </span>
+
+    </nav>
+
+
+    <!-- =======================================================
+         SYSTEM TEXT
+         ======================================================= -->
+
+    <div class="system-text">
+      KIESVERKEHR // 2026<br>
+      DARMSTADT_DE<br>
+      INDEX.HTML
+    </div>
+
+  </main>
+
+
+  <!-- =========================================================
+       JAVASCRIPT
+       ========================================================= -->
+
+  <script>
+
+    const mainImage =
+      document.getElementById("main-image");
+
+    const aboutContent =
+      document.getElementById("about-content");
+
+    const navBike =
+      document.getElementById("nav-bike");
+
+    const navAbout =
+      document.getElementById("nav-about");
+
+
+    let currentView = "bike";
+
+    let switching = false;
+
+
+    /* =========================================================
+       BIKE PRODUCT LINK
+       ========================================================= */
+
+    mainImage.addEventListener(
+      "click",
+      function () {
+
+        if (
+          currentView === "bike" &&
+          !switching
+        ) {
+
+          window.open(
+            "https://standert.de/products/kieswerk-sram-rival-axs-xplr-dt-swiss-grc1600-plump-plum?collection=aluminium-gravel-performance-bikes",
+            "_blank",
+            "noopener,noreferrer"
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       ACTIVE NAVIGATION
+       ========================================================= */
+
+    function setActiveNavigation(view) {
+
+      navBike.classList.remove(
+        "active"
+      );
+
+      navAbout.classList.remove(
+        "active"
+      );
+
+
+      if (view === "bike") {
+
+        navBike.classList.add(
+          "active"
+        );
+
+      }
+
+
+      if (view === "about") {
+
+        navAbout.classList.add(
+          "active"
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       SHOW BIKE
+       ========================================================= */
+
+    function showBike(event) {
+
+      event.preventDefault();
+
+
+      if (
+        currentView === "bike" ||
+        switching
+      ) {
+
+        return;
+
+      }
+
+
+      switching = true;
+
+      setActiveNavigation("bike");
+
+
+      aboutContent.classList.remove(
+        "glitch-in"
+      );
+
+      aboutContent.classList.add(
+        "glitch-out"
+      );
+
+
+      setTimeout(
+        () => {
+
+          aboutContent.style.display =
+            "none";
+
+          aboutContent.classList.remove(
+            "glitch-out"
+          );
+
+
+          mainImage.style.display =
+            "block";
+
+          void mainImage.offsetWidth;
+
+          mainImage.classList.add(
+            "glitch-in"
+          );
+
+
+          currentView =
+            "bike";
+
+
+          setTimeout(
+            () => {
+
+              mainImage.classList.remove(
+                "glitch-in"
+              );
+
+              switching = false;
+
+            },
+            280
+          );
+
+        },
+        220
+      );
+
+
+      history.replaceState(
+        null,
+        "",
+        "#bike"
+      );
+
+    }
+
+
+    /* =========================================================
+       SHOW ABOUT
+       ========================================================= */
+
+    function showAbout(event) {
+
+      event.preventDefault();
+
+
+      if (
+        currentView === "about" ||
+        switching
+      ) {
+
+        return;
+
+      }
+
+
+      switching = true;
+
+      setActiveNavigation(
+        "about"
+      );
+
+
+      mainImage.classList.remove(
+        "glitch-in"
+      );
+
+      mainImage.classList.add(
+        "glitch-out"
+      );
+
+
+      setTimeout(
+        () => {
+
+          mainImage.style.display =
+            "none";
+
+          mainImage.classList.remove(
+            "glitch-out"
+          );
+
+
+          aboutContent.style.display =
+            "block";
+
+          void aboutContent.offsetWidth;
+
+          aboutContent.classList.add(
+            "glitch-in"
+          );
+
+
+          currentView =
+            "about";
+
+
+          setTimeout(
+            () => {
+
+              aboutContent.classList.remove(
+                "glitch-in"
+              );
+
+              switching = false;
+
+            },
+            280
+          );
+
+        },
+        220
+      );
+
+
+      history.replaceState(
+        null,
+        "",
+        "#about"
+      );
+
+    }
+
+
+    /* =========================================================
+       INITIAL HASH
+       ========================================================= */
+
+    if (window.location.hash === "#about") {
+
+      mainImage.style.display =
+        "none";
+
+      aboutContent.style.display =
+        "block";
+
+      currentView =
+        "about";
+
+      setActiveNavigation(
+        "about"
+      );
+
+    }
+
+    else {
+
+      mainImage.style.display =
+        "block";
+
+      aboutContent.style.display =
+        "none";
+
+      currentView =
+        "bike";
+
+      setActiveNavigation(
+        "bike"
+      );
+
+    }
+
+  </script>
+
+</body>
+</html>
