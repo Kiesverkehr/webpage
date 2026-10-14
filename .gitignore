@@ -1,0 +1,14 @@
+# Cloudflare Wrangler
+.wrangler/
+
+# Node.js
+node_modules/
+
+# Environment variables and secrets
+.env
+.env.*
+.dev.vars
+.dev.vars.*
+
+# macOS
+.DS_Store

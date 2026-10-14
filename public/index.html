@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Kiesverkehr – Coming Soon</title>
+
+    <meta
+        name="description"
+        content="Kiesverkehr – Handmade Cycling Bags. Coming Soon."
+    >
+
+    <!-- Google Fonts: WindSong -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=WindSong:wght@400;500&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            min-height: 100%;
+        }
+
+        body {
+            min-height: 100vh;
+            min-height: 100dvh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background-color: #faf9f6;
+            color: #171717;
+
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+
+            padding: 40px 24px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            text-align: center;
+        }
+
+        /* =========================
+           LOGO
+        ========================= */
+
+        .logo {
+            width: clamp(175px, 38vw, 290px);
+            height: auto;
+
+            display: block;
+
+            margin-bottom: -8px;
+        }
+
+        /* =========================
+           BRAND NAME
+        ========================= */
+
+        .brand {
+            font-family: 'WindSong', cursive;
+
+            font-size: clamp(3.5rem, 10vw, 6rem);
+            font-weight: 500;
+
+            line-height: 1.5;
+            white-space: nowrap;
+
+            margin-top: 0;
+        }
+
+        /* =========================
+           DIVIDER
+        ========================= */
+
+        .divider {
+            width: clamp(120px, 36vw, 192px);
+            height: 1px;
+
+            background-color: #171717;
+            opacity: 0.55;
+
+            margin: 20px 0 16px;
+        }
+
+        /* =========================
+           COMING SOON
+        ========================= */
+
+        .coming-soon {
+            font-size: clamp(0.75rem, 2vw, 0.95rem);
+
+            font-weight: 400;
+
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+
+            line-height: 1.5;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 480px) {
+
+            .container {
+                padding: 24px 16px;
+            }
+
+            .logo {
+                width: clamp(170px, 55vw, 230px);
+                margin-bottom: -6px;
+            }
+
+            .brand {
+                font-size: clamp(2.8rem, 11vw, 4.5rem);
+            }
+
+            .divider {
+                width: 140px;
+                margin: 16px 0 14px;
+            }
+
+            .coming-soon {
+                font-size: 0.75rem;
+                letter-spacing: 0.3em;
+            }
+        }
+
+        /* =========================
+           SMALL SCREENS
+        ========================= */
+
+        @media (max-height: 500px) {
+
+            .container {
+                padding: 16px;
+            }
+
+            .logo {
+                width: 130px;
+            }
+
+            .brand {
+                font-size: 3rem;
+            }
+
+            .divider {
+                margin: 10px 0;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+
+        <!-- Oak tree logo -->
+        <img
+            src="/logo.png"
+            alt="Kiesverkehr – windgepeitschte Eiche"
+            class="logo"
+        >
+
+        <!-- Brand name -->
+        <h1 class="brand">
+            Kiesverkehr
+        </h1>
+
+        <!-- Divider -->
+        <div
+            class="divider"
+            aria-hidden="true">
+        </div>
+
+        <!-- Coming Soon -->
+        <p class="coming-soon">
+            Coming Soon
+        </p>
+
+    </main>
+
+</body>
+
+</html>
