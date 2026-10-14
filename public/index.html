@@ -5,23 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Kiesverkehr – Coming Soon</title>
+    <title>Kiesverkehr</title>
 
     <meta
         name="description"
-        content="Kiesverkehr – Handmade Cycling Bags. Coming Soon."
+        content="Kiesverkehr - Handmade Cycling Bags. Coming Soon."
     >
 
-    <!-- Google Fonts: WindSong -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=WindSong:wght@400;500&display=swap"
-        rel="stylesheet"
-    >
+    <!-- Kiesverkehr Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
 
     <style>
+
         /* =========================
            RESET
         ========================= */
@@ -68,62 +64,40 @@
         }
 
         /* =========================
-           LOGO
+           OAK TREE LOGO
         ========================= */
 
         .logo {
-            width: clamp(175px, 38vw, 290px);
-            height: auto;
-
             display: block;
 
-            margin-bottom: -8px;
+            width: clamp(190px, 42vw, 320px);
+            height: auto;
+
+            margin-bottom: -15px;
         }
 
         /* =========================
-           BRAND NAME
+           BRAND NAME IMAGE
         ========================= */
 
         .brand {
-            font-family: 'WindSong', cursive;
+            width: 100%;
 
-            font-size: clamp(3.5rem, 10vw, 6rem);
-            font-weight: 500;
-
-            line-height: 1.5;
-            white-space: nowrap;
-
-            margin-top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        /* =========================
-           DIVIDER
-        ========================= */
+        .brand-image {
+            display: block;
 
-        .divider {
-            width: clamp(120px, 36vw, 192px);
-            height: 1px;
+            width: 100%;
+            max-width: 550px;
+            height: auto;
 
-            background-color: #171717;
-            opacity: 0.55;
-
-            margin: 20px 0 16px;
+            object-fit: contain;
         }
 
-        /* =========================
-           COMING SOON
-        ========================= */
-
-        .coming-soon {
-            font-size: clamp(0.75rem, 2vw, 0.95rem);
-
-            font-weight: 400;
-
-            letter-spacing: 0.35em;
-            text-transform: uppercase;
-
-            line-height: 1.5;
-        }
 
         /* =========================
            MOBILE
@@ -136,23 +110,15 @@
             }
 
             .logo {
-                width: clamp(170px, 55vw, 230px);
-                margin-bottom: -6px;
+                width: clamp(180px, 58vw, 240px);
+                margin-bottom: -10px;
             }
 
-            .brand {
-                font-size: clamp(2.8rem, 11vw, 4.5rem);
+            .brand-image {
+                width: 100%;
+                max-width: 92vw;
             }
 
-            .divider {
-                width: 140px;
-                margin: 16px 0 14px;
-            }
-
-            .coming-soon {
-                font-size: 0.75rem;
-                letter-spacing: 0.3em;
-            }
         }
 
         /* =========================
@@ -166,16 +132,14 @@
             }
 
             .logo {
-                width: 130px;
+                width: 150px;
+                margin-bottom: -8px;
             }
 
-            .brand {
-                font-size: 3rem;
+            .brand-image {
+                max-width: 320px;
             }
 
-            .divider {
-                margin: 10px 0;
-            }
         }
 
     </style>
@@ -188,25 +152,18 @@
         <!-- Oak tree logo -->
         <img
             src="/logo.png"
-            alt="Kiesverkehr – windgepeitschte Eiche"
+            alt="Windgepeitschte Eiche am Wasser"
             class="logo"
         >
 
-        <!-- Brand name -->
+        <!-- Vintage Kiesverkehr lettering -->
         <h1 class="brand">
-            Kiesverkehr
+            <img
+                src="/schriftzug.png"
+                alt="Kiesverkehr"
+                class="brand-image"
+            >
         </h1>
-
-        <!-- Divider -->
-        <div
-            class="divider"
-            aria-hidden="true">
-        </div>
-
-        <!-- Coming Soon -->
-        <p class="coming-soon">
-            Coming Soon
-        </p>
 
     </main>
 
