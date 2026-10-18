@@ -19,9 +19,14 @@
     <meta property="og:url" content="https://kiesverkehr.de">
     <meta property="og:site_name" content="Kiesverkehr">
 
+    <meta property="og:image" content="https://kiesverkehr.de/logo.png">
+    <meta property="og:image:alt" content="Kiesverkehr Logo">
+    <meta property="og:image:width" content="3616">
+    <meta property="og:image:height" content="2738">
+
     <!-- Kiesverkehr Favicon -->
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
+    <link rel="icon" href="/favicon.ico?v=2" sizes="256x256">
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png?v=2">
 
     <style>
 
@@ -47,7 +52,7 @@
             justify-content: center;
             align-items: center;
 
-            background-color: #faf9f6;
+            background-color: #ffffff;
             color: #171717;
 
             font-family: Arial, Helvetica, sans-serif;
@@ -70,83 +75,28 @@
             text-align: center;
         }
 
-        /* =========================
-           OAK TREE LOGO
-        ========================= */
+        .brand {
+            width: 100%;
+            line-height: 0;
+        }
 
         .logo {
             display: block;
-
-            width: clamp(190px, 42vw, 320px);
-            height: auto;
-
-            margin-bottom: -15px;
-        }
-
-        /* =========================
-           BRAND NAME IMAGE
-        ========================= */
-
-        .brand {
             width: 100%;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .brand-image {
-            display: block;
-
-            width: 100%;
-            max-width: 550px;
             height: auto;
-
-            object-fit: contain;
         }
-
-
-        /* =========================
-           MOBILE
-        ========================= */
 
         @media (max-width: 480px) {
-
             .container {
                 padding: 24px 16px;
             }
-
-            .logo {
-                width: clamp(180px, 58vw, 240px);
-                margin-bottom: -10px;
-            }
-
-            .brand-image {
-                width: 100%;
-                max-width: 92vw;
-            }
-
         }
 
-        /* =========================
-           SMALL SCREENS
-        ========================= */
-
         @media (max-height: 500px) {
-
             .container {
+                max-width: min(650px, 110vh);
                 padding: 16px;
             }
-
-            .logo {
-                width: 150px;
-                margin-bottom: -8px;
-            }
-
-            .brand-image {
-                max-width: 320px;
-            }
-
         }
 
     </style>
@@ -156,19 +106,13 @@
 
     <main class="container">
 
-        <!-- Oak tree logo -->
-        <img
-            src="/logo.png"
-            alt="Windgepeitschte Eiche am Wasser"
-            class="logo"
-        >
-
-        <!-- Vintage Kiesverkehr lettering -->
         <h1 class="brand">
             <img
-                src="/schriftzug.png"
+                src="/logo.png?v=2"
                 alt="Kiesverkehr"
-                class="brand-image"
+                class="logo"
+                width="3616"
+                height="2738"
             >
         </h1>
 
